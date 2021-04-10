@@ -4,9 +4,6 @@
 
 //
 
-
-
-
 const tf = require('@tensorflow/tfjs');
 
     require('@tensorflow/tfjs-node');
@@ -17,7 +14,6 @@ const tf = require('@tensorflow/tfjs');
 
     const irisTesting = require('../../iris-testing.json');
 const { request } = require('../../server');
-const { default: reportWebVitals } = require('../../react-ui/src/reportWebVitals');
 
     var lossValue;
 
@@ -31,7 +27,7 @@ exports.trainAndPredict = function (req, res) {
 
     
 
-    console.log("+++++++++++++++++++++++RESPONSE: " + req.petal_length )
+    console.log("+++++++++++++++++++++++RESPONSE: " )
     //
 
     // convert/setup our data for tensorflow.js
@@ -43,14 +39,10 @@ exports.trainAndPredict = function (req, res) {
 
     const trainingData = tf.tensor2d(iris.map(item => [
 
-
-        //NEED TO CHANGE THESE VALUES
         item.sepal_length = 32,
         item.sepal_width = 34,
         item.petal_length = 23,
         item.petal_width = 23,
-
-       
 
     ]))
 
@@ -88,7 +80,6 @@ exports.trainAndPredict = function (req, res) {
 
     const testingData = tf.tensor2d(irisTesting.map(item => [
 
-        //NEED TO CHANGE THESE VALUES
         item.sepal_length = 213,
         item.sepal_width = 234,
         item.petal_length = 23,
@@ -168,7 +159,6 @@ exports.trainAndPredict = function (req, res) {
 
             {
                 
-                //NEED TO CHANGE THESE VALUES
                 epochs: 100,
 
                 callbacks: { //list of callbacks to be called during training
