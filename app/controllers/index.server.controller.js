@@ -8,28 +8,15 @@ const tf = require('@tensorflow/tfjs');
 
     require('@tensorflow/tfjs-node');
 
-    //load iris training and testing data
-
     const iris = require('../../iris.json');
 
     const irisTesting = require('../../iris-testing.json');
 
     var lossValue;
 
-    //
-
 exports.trainAndPredict = function (req, res) {
 
     console.log(irisTesting)
-
-    //
-
-    // convert/setup our data for tensorflow.js
-
-    //
-
-    //tensor of features for training data
-    // include only features, not the output
 
     const trainingData = tf.tensor2d(iris.map(item => [
 
@@ -38,20 +25,6 @@ exports.trainAndPredict = function (req, res) {
         item.petal_width
 
     ]))
-
-    //console.log(trainingData.dataSync())
-
-    //
-
-    //tensor of output for training data
-
-    //the values for species will be:
-
-    // setosa:       1,0,0
-
-    // virginica:    0,1,0
-
-    // versicolor:   0,0,1
 
     const outputData = tf.tensor2d(iris.map(item => [
 
@@ -63,12 +36,6 @@ exports.trainAndPredict = function (req, res) {
 
     ]))
 
-    //console.log(outputData.dataSync())
-
-    //
-
-    //tensor of features for testing data
-
     const testingData = tf.tensor2d(irisTesting.map(item => [
 
         item.sepal_length, item.sepal_width,
@@ -77,31 +44,21 @@ exports.trainAndPredict = function (req, res) {
 
     ]))
 
-    //console.log(testingData.dataSync())    
-
-    //
-
-    // build neural network using a sequential model
-
     const model = tf.sequential()
 
-    //add the first layer
-
     model.add(tf.layers.dense({
 
-        inputShape: [4], // four input neurons
+        inputShape: [4], 
 
         activation: "sigmoid",
 
-        units: 5, //dimension of output space (first hidden layer)
+        units: 5, 
 
     }))
 
-    //add the hidden layer
-
     model.add(tf.layers.dense({
 
-        inputShape: [5], //dimension of hidden layer
+        inputShape: [5], 
 
         activation: "sigmoid",
 
@@ -109,17 +66,13 @@ exports.trainAndPredict = function (req, res) {
 
     }))
 
-    //add output layer
-
     model.add(tf.layers.dense({
 
         activation: "sigmoid",
 
-        units: 3, //dimension of final output (setosa, virginica, versicolor)
+        units: 3, 
 
     }))
-
-    //compile the model with an MSE loss function and Adam algorithm
 
     model.compile({
 
@@ -131,19 +84,9 @@ exports.trainAndPredict = function (req, res) {
 
     console.log(model.summary())
 
-    //
-
-    //Train the model and predict the results for testing data
-
-    //
-
-    // train/fit the model for the fixed number of epochs
-
     async function run() {
 
         const startTime = Date.now()
-
-        //train the model
 
         await model.fit(trainingData, outputData,         
 

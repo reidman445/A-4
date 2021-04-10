@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
 import axios from 'axios';
-
 import Spinner from 'react-bootstrap/Spinner';
-
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -12,21 +9,15 @@ import './App.css';
 
 //
 function App() {
-
   const [data, setData] = useState({});
   const [showLoading, setShowLoading] = useState(true);
   const apiUrl = "http://localhost:3000/run";
-
   const apiUrl2 = "http://localhost:3000/update";
-
   const [sLength, setsLength] = useState({ sLength: ' '});
-
   const [user, setUser] = useState({ _id: '', firstName: '', lastName: '', 
   email: '',studentNumber: '',password: '' });  
-
   //runs once after the first rendering of page
   useEffect(() => {
-
     const fetchData = async () => {
 
       axios.get(apiUrl)
@@ -93,93 +84,65 @@ function App() {
             <li>versicolor: 0,0,1 </li>
 
             <table className="type11" align="center">
-
               <thead>
-
                 <tr>
-
                   <th>Test 1</th>
                   <th>Test 2</th>
                   <th>Test 3</th>
-
                 </tr>
-
               </thead>
 
-              
-
               <tbody>
-
-                
-
                 <tr>
-
                   <td className="App-td">
-
                     { data.row1.map((value, index) => (
-
                       <p key={index}>{value}</p>
-
                     ))}
-
                   </td>
 
                   <td className="App-td">
-
                   { data.row2.map((value, index) => (
-
                     <p key={index}>{value}</p>
-
                   ))}
-
                   </td>
 
                   <td className="App-td">
-
                   { data.row3.map((value, index) => (
-
                     <p key={index}>{value}</p>
-
                   ))}
 
                   </td>
-
-
                 </tr>
-
               </tbody>
-
             </table>
 
             <Jumbotron>
         <Form onSubmit={updateUser}>
           <Form.Group>
             <Form.Label>Sepal length: </Form.Label>
-            <Form.Control type="text" name="sLength" id="sLength"  value={user.sLength}  onChange={onChange} />
+            <Form.Control type="text" name="sLength" id="sLength"  value={user.sLength}  onChange={onChange} required/>
             </Form.Group>
           <Form.Group>
             <Form.Label>Sepal width: </Form.Label>
-            <Form.Control type="text" name="sWidth" id="sWidth"  value={user.sWidth} onChange={onChange} />
+            <Form.Control type="text" name="sWidth" id="sWidth"  value={user.sWidth} onChange={onChange} required/>
           </Form.Group>
           <Form.Group>
             <Form.Label>Petal Length: </Form.Label>
-            <Form.Control type="text" name="email" id="email" rows="3"  value={user.email} onChange={onChange} />
+            <Form.Control type="text" name="email" id="email" rows="3"  value={user.email} onChange={onChange} required/>
           </Form.Group>
           <Form.Group>
             <Form.Label>Petal Width: </Form.Label>
-            <Form.Control type="text" name="studentNumber" id="studentNumber" value={user.studentNumber} onChange={onChange} />
+            <Form.Control type="text" name="studentNumber" id="studentNumber" value={user.studentNumber} onChange={onChange} required/>
           </Form.Group>
           <Form.Group>
             <Form.Label>Epochs: </Form.Label>
-            <Form.Control type="text" name="epochs" id="epochs"  value={user.epochs} onChange={onChange} />
+            <Form.Control type="text" name="epochs" id="epochs"  value={user.epochs} onChange={onChange} required/>
           </Form.Group>
           <Form.Group>
             <Form.Label>Learning rate: </Form.Label>
             <Form.Control type="text" name="learningRate" id="learningRate"  value={user.learningRate} onChange={onChange} />
           </Form.Group>
-          
-        
-          <Button variant="primary" type="submit">
+          <Button className="button" type="submit">
             Update
           </Button>
         </Form>
@@ -198,9 +161,6 @@ function App() {
           </Spinner> }
 
         </div>
-
-        
-
 
       }
 
