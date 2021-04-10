@@ -43,6 +43,8 @@ exports.trainAndPredict = function (req, res) {
 
     const trainingData = tf.tensor2d(iris.map(item => [
 
+
+        //NEED TO CHANGE THESE VALUES
         item.sepal_length = 32,
         item.sepal_width = 34,
         item.petal_length = 23,
@@ -86,6 +88,7 @@ exports.trainAndPredict = function (req, res) {
 
     const testingData = tf.tensor2d(irisTesting.map(item => [
 
+        //NEED TO CHANGE THESE VALUES
         item.sepal_length = 213,
         item.sepal_width = 234,
         item.petal_length = 23,
@@ -165,6 +168,7 @@ exports.trainAndPredict = function (req, res) {
 
             {
                 
+                //NEED TO CHANGE THESE VALUES
                 epochs: 100,
 
                 callbacks: { //list of callbacks to be called during training
